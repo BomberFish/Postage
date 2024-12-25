@@ -1,16 +1,77 @@
-/* This is to modify anything outside of components */
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+html,
+body {
+	width: 100%;
+	height: 100vh;
+	padding: 0;
+	margin: 0;
+	overflow-x: hidden;
+}
+
+a {
+	color: rgb(var(--m3-scheme-primary));
+}
+
+:root {
+	--m3-font: 'Roboto Flex', Roboto, RobotoDraft, 'Droid Sans', system-ui, sans-serif;
+	--m3-font-display: 'Roboto Flex', Roboto, RobotoDraft, 'Droid Sans', system-ui, sans-serif;
+	--m3-font-body: 'Roboto Flex', Roboto, RobotoDraft, 'Droid Sans', system-ui, sans-serif;
 }
 
 body {
-    width: 100%;
-    height: 100vh;
+	font-family: var(--m3-font-body);
 }
 
-#app {
-    width: 100%;
-    height: 100%;
+#app:has(#render-error) {
+	align-content: center;
+	width: 100%;
+	height: 100vh;
+	background-color: rgb(var(--m3-scheme-background, 255 255 255));
+	color: rgb(var(--m3-scheme-on-background, 0 0 0));
+}
+
+#render-error {
+	text-align: center;
+	font-size: 1.25rem;
+	font-weight: 500;
+}
+
+/* retarded but temporary fix */
+:root, ::backdrop {
+	--m3-scheme-primary: 216 186 250;
+	--m3-scheme-on-primary: 60 36 90;
+	--m3-scheme-primary-container: 84 59 114;
+	--m3-scheme-on-primary-container: 238 219 255;
+	--m3-scheme-inverse-primary: 108 83 139;
+	--m3-scheme-secondary: 207 193 218;
+	--m3-scheme-on-secondary: 54 45 64;
+	--m3-scheme-secondary-container: 77 67 87;
+	--m3-scheme-on-secondary-container: 236 221 247;
+	--m3-scheme-tertiary: 242 183 192;
+	--m3-scheme-on-tertiary: 75 37 44;
+	--m3-scheme-tertiary-container: 101 59 66;
+	--m3-scheme-on-tertiary-container: 255 217 222;
+	--m3-scheme-error: 255 180 171;
+	--m3-scheme-on-error: 105 0 5;
+	--m3-scheme-error-container: 147 0 10;
+	--m3-scheme-on-error-container: 255 218 214;
+	--m3-scheme-background: 21 18 24;
+	--m3-scheme-on-background: 232 224 232;
+	--m3-scheme-surface: 21 18 24;
+	--m3-scheme-on-surface: 232 224 232;
+	--m3-scheme-surface-variant: 74 69 78;
+	--m3-scheme-on-surface-variant: 204 196 207;
+	--m3-scheme-inverse-surface: 232 224 232;
+	--m3-scheme-inverse-on-surface: 51 47 53;
+	--m3-scheme-outline: 149 142 152;
+	--m3-scheme-outline-variant: 74 69 78;
+	--m3-scheme-shadow: 0 0 0;
+	--m3-scheme-scrim: 0 0 0;
+	--m3-scheme-surface-dim: 21 18 24;
+	--m3-scheme-surface-bright: 60 56 62;
+	--m3-scheme-surface-container-lowest: 16 13 18;
+	--m3-scheme-surface-container-low: 29 26 32;
+	--m3-scheme-surface-container: 33 30 36;
+	--m3-scheme-surface-container-high: 44 41 47;
+	--m3-scheme-surface-container-highest: 55 51 57;
+	--m3-scheme-surface-tint: 216 186 250;
 }

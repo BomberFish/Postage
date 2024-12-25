@@ -1,95 +1,64 @@
-//the base style (used in the root div)
-const baseStyle = css`
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
-    background: #181a1b;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    gap: 6px;
-`;
+import { NavDrawer, NavDrawerButton, Button, Icon } from "m3-dreamland";
+import RequestView from "./request";
+import { settings } from "../store";
+import iconOutput from '@ktibow/iconset-material-symbols/output';
 
-//sets the styles for the dreamland logo
-const img = css`
-    width: 200px;
-    height: 200px;
-`;
+const Home: Component<{}, {
+	url: string;
+	contents: string;
+	requestComponent: HTMLElement;
+}> = function () {
+	this.url = settings.stateful.urls[0];
+	this.contents = "";
+	this.requestComponent = <RequestView bind:url={use(settings.stateful.urls[0])}/>;
+	this.css = `
+	width: 100vw;
+	height: 100vh;
+	font-family: 'Roboto Flex', Roboto, RobotoDraft, 'Droid Sans', system-ui, sans-serif;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	overflow: hidden;
 
-//sets the styles for h1 tag ("Dreamland.js")
-const title = css`
-    font-size: 3.2em;
-`;
+	&:first-child {
+		height: 100vh;
+	}
 
-//set the styles for the p tag ("edit something something to modify this page")
-const getStarted = css`
-    font-size: 1.2em;
-`;
+	[data-component="NavDrawer"] {
+		width: 20vw;
+	}
 
-//sets the styles for the div the buttons are contained in
-const buttonRow = css`
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-`;
+	// justify-content: center;
 
-//sets the styles for the button with the count in it
-const counterButton = css`
-    color: white;
-    background: #9932b3;
-    border: none;
-    border-radius: 8px;
-    font-size: 1em;
-    padding: 0.6em 1.2em;
-    cursor: pointer;
-`;
+	`
 
-//sets the styles for the link to the dreamland.js docs
-const docsButton = css`
-    color: white;
-    background-color: #9932b3;
-    border: none;
-    border-radius: 8px;
-    font-size: 1em;
-    padding: 0.6em 1.2em;
-    text-decoration: none;
-`;
+	this.mount = () => {
+		console.log(settings)
+	}
 
-const Home: Component<
-    {
-        // component properties. if you had a component that took a property like `<Button text="..." /> you would use a type like the one in the following line
-        // text: string
-    },
-    {
-        // types for internal state
-        counter: number;
-    }
-> = function () {
-    this.counter = 0;
-    return (
-        <div class={baseStyle}>
-            <img class={img} src="/logo.svg"></img>
-            <h1 class={title}>Dreamland.js</h1>
-            <p class={getStarted}>Edit src/routes/home.tsx to modfiy this page</p>
-            <br />
-            <div class={buttonRow}>
-                <button class={counterButton} on:click={() => this.counter++}>
-                    Count is: {use(this.counter)}
-                </button>
-                <a
-                    class={docsButton}
-                    href="https://dreamland.js.org/learn"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                >
-                    Get Started
-                </a>
-            </div>
-        </div>
-    );
+	return (
+		<div>
+			<NavDrawer>
+					{use(this.url, thisUrl => settings.stateful.urls.map((url, i) => {
+						return ( 
+						<NavDrawerButton icon={iconOutput} on:click={() => { 
+							this.requestComponent = <RequestView bind:url={use(settings.stateful.urls[i])} />
+						 }} 
+						 selected={thisUrl === url}
+						>
+							{url}
+						</NavDrawerButton>
+						)
+					}))}
+					<Button type="filled" on:click={() => {
+						settings.stateful.urls.push("https://example.com/");
+						this.url = settings.stateful.urls[settings.stateful.urls.length - 1];
+						this.requestComponent = <RequestView bind:url={use(settings.stateful.urls[settings.stateful.urls.length - 1])} />
+					} }>New Request</Button>
+			</NavDrawer>
+			{use(this.requestComponent)}
+		</div>
+	);
 };
 
 export default Home;

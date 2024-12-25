@@ -1,5 +1,5 @@
 {
-  "name": "create-dreamland-app",
+  "name": "postage",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,10 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "dreamland": "^0.0.24",
-    "dreamland-router": "https://github.com/mercuryworkshop/dreamland-router",
+    "@ktibow/iconset-material-symbols": "^0.0.1733470085",
+    "@mercuryworkshop/epoxy-tls": "2.1.16-1",
+    "dreamland": "github:mercuryworkshop/dreamlandjs",
+    "m3-dreamland": "github:MercuryWorkshop/m3-dreamland",
     "rollup-plugin-typescript2": "^0.36.0",
-    "vite-plugin-dreamland": "^1.2.0"
+    "vite-plugin-dreamland": "^1.2.0",
+    "vite-plugin-static-copy": "^2.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.2.0",
