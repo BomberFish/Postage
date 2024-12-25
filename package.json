@@ -14,14 +14,14 @@
     "dreamland": "github:mercuryworkshop/dreamlandjs",
     "m3-dreamland": "github:MercuryWorkshop/m3-dreamland",
     "rollup-plugin-typescript2": "^0.36.0",
-    "vite-plugin-dreamland": "^1.2.0",
+    "vite-plugin-dreamland": "^1.2.1",
     "vite-plugin-static-copy": "^2.2.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.2.0",
-    "eslint": "^9.2.0",
-    "prettier": "^3.2.5",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.11"
+    "@eslint/js": "^9.17.0",
+    "eslint": "^9.17.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11"
   }
 }
