@@ -1,6 +1,6 @@
 # Postage
 
-An HTTP client for the web.
+A basic HTTP client for the web, without CORS.
 
 ## Credits
 
