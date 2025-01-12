@@ -156,13 +156,9 @@ const RequestBodyView: Component<{
 	width: 100%;
 	height: 100%;
 
-	[data-component="TextFieldMultiline"] {
-		min-height: 10rem;
-
-		* {
-			width: 100%!important;
-			min-height: 10rem!important;
-		}
+	.TextFieldMultiline-m3-container {
+		min-height: 10rem!important;
+		width: 100%!important;
 	}
 	`
 	useChange(this.headers, () => {
@@ -207,9 +203,9 @@ const ResponseView: Component<{
 		height: 100%;
 	}
 
-	[data-component="Tabs"] {
-		margin-bottom: 1rem;
-	}
+	// .Tabs-m3-container {
+	// 	margin-bottom: 1rem;
+	// }
 	`
 	return (
 		<div>

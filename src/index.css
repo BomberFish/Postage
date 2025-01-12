@@ -81,7 +81,7 @@ body {
 	align-items: center;
 	gap: 1rem;
 
-	[data-component="TextField"] {
+	span:has(.TextField-m3-container) {
 		flex-grow: 1;
 
 		* {
@@ -90,11 +90,13 @@ body {
 	}
 }
 
-[data-component="Tabs"] {
+/* [data-component="Tabs"] { */
+.Tabs-m3-container {
 	margin-bottom: 1rem;
 }
 
-[data-component="CircularProgressIndeterminate"] {
+/* [data-component="CircularProgressIndeterminate"] { */
+.CircularProgressIndeterminate-m3-container {
 	scale: 0.45;
 }
 
