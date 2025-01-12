@@ -76,7 +76,7 @@ body {
 	--m3-scheme-surface-tint: 216 186 250;
 }
 
-#request > [data-component="Card"] > div {
+#request > span:first-of-type > .Card-m3-container.type-elevated {
 	flex-direction: row;
 	align-items: center;
 	gap: 1rem;
