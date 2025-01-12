@@ -109,9 +109,20 @@ const RequestView: Component<{
 					this.inProgress = true;
 					try {
 						console.log(this.method);
+
+						let fixedHeaders: any = {};
+						this.headers.forEach(header => {
+							if (!header.key || !header.value) return;
+							if (header.key == "" || header.value == "") return;
+							fixedHeaders = {
+								...fixedHeaders,
+								[header.key]: header.value
+							}
+						})
+						console.log(fixedHeaders);
 						const res = await fetch(this.url!, {
 							method: this.method,
-							headers: this.headers,
+							headers: fixedHeaders,
 							body: this.body
 						});
 						console.log(res);
