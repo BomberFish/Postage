@@ -75,3 +75,17 @@ body {
 	--m3-scheme-surface-container-highest: 55 51 57;
 	--m3-scheme-surface-tint: 216 186 250;
 }
+
+[data-component="Card"]:first-of-type > div {
+	flex-direction: row;
+	align-items: center;
+	gap: 1rem;
+
+	[data-component="TextField"] {
+		flex-grow: 1;
+
+		* {
+			width: 100%;
+		}
+	}
+}

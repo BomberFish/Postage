@@ -12,8 +12,7 @@ const RequestView: Component<{
 }, {
 	contents: string;
 	tab: "request" | "response";
-	get: boolean;
-	post: boolean;
+	method: string;
 	headers: any;
 	body: string;
 	inProgress: boolean;
@@ -21,8 +20,7 @@ const RequestView: Component<{
 	this.url = this.url || "";
 	this.contents = "";
 	this.tab = "request";
-	this.get = true;
-	this.post = false;
+	this.method = "GET";
 	this.headers = {};
 	this.body = "";
 	this.inProgress = false;
@@ -90,16 +88,26 @@ const RequestView: Component<{
 		<div id="request">
 			<Card type="elevated">
 				<TextField bind:value={use(this.url!)} name="Enter URL" />
-				<SegmentedButtonContainer>
-					<SegmentedButtonItem type="radio" name="method" input="method-0" bind:checked={use(this.get)}>GET</SegmentedButtonItem>
-					<SegmentedButtonItem type="radio" name="method" input="method-1">POST</SegmentedButtonItem>
-				</SegmentedButtonContainer>
+				<div class="method-select" on:change={(e: Event) => {
+					const target = e.target as HTMLInputElement;
+					this.method = target!.id.split("-")[1] as any;
+					console.log(this.method);
+				}}>
+					<SegmentedButtonContainer>
+						<SegmentedButtonItem type="radio" name="method" input="method-GET" checked={use(this.method, method => method === "GET")}>GET</SegmentedButtonItem>
+						<SegmentedButtonItem type="radio" name="method" input="method-POST" checked={use(this.method, method => method === "POST")}>POST</SegmentedButtonItem>
+						<SegmentedButtonItem type="radio" name="method" input="method-PUT" checked={use(this.method, method => method === "PUT")}>PUT</SegmentedButtonItem>
+						<SegmentedButtonItem type="radio" name="method" input="method-DELETE" checked={use(this.method, method => method === "DELETE")}>DELETE</SegmentedButtonItem>
+						<SegmentedButtonItem type="radio" name="method" input="method-PATCH" checked={use(this.method, method => method === "PATCH")}>PATCH</SegmentedButtonItem>
+					</SegmentedButtonContainer>
+				</div>
+				{/* <div>{use(this.method)}</div> */}
 				<Button type="filled" on:click={async () => {
 					this.inProgress = true;
 					try {
-						console.log(this.get);
+						console.log(this.method);
 						const res = await fetch(this.url!, {
-							method: use(this.get) ? "GET" : "POST",
+							method: this.method,
 							headers: this.headers,
 							body: this.body
 						});
@@ -157,8 +165,8 @@ const RequestBodyView: Component<{
 		<div>
 			<Card type="elevated">
 				{use(this.headers, headers => {
-					if (headers) {
-						return (
+					// if (headers) {
+					// 	return (
 							<Card type="filled">
 								{Object.entries(headers).map(([key, value]) => {
 									return (
@@ -169,8 +177,8 @@ const RequestBodyView: Component<{
 									)
 								})}
 							</Card>
-						)
-					}
+					// 	)
+					// }
 				})}
 				<br></br>
 				<Button type="filled" on:click={() => {
