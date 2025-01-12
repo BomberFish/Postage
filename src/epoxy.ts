@@ -3,7 +3,7 @@ import { settings } from "./store";
 
 export let epoxyVersion = epoxyInfo.version;
 
-const EPOXY_PATH = "/epoxy/epoxy.wasm";
+const EPOXY_PATH = "./epoxy/epoxy.wasm";
 
 let cache: Cache;
 let initted: boolean = false;
