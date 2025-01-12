@@ -5,10 +5,14 @@ import iconOutput from '@ktibow/iconset-material-symbols/output';
 
 const Home: Component<{}, {
 	url: string;
+	index: number;
+	saveurl: string;
 	contents: string;
 	requestComponent: HTMLElement;
 }> = function () {
 	this.url = settings.stateful.urls[0];
+	this.index = 0;
+	this.saveurl = settings.stateful.urls[0];
 	this.contents = "";
 	this.requestComponent = <RequestView bind:url={use(settings.stateful.urls[0])}/>;
 	this.css = `
@@ -24,10 +28,6 @@ const Home: Component<{}, {
 		height: 100vh;
 	}
 
-	[data-component="NavDrawer"] {
-		width: 20vw;
-	}
-
 	// justify-content: center;
 
 	`
@@ -36,24 +36,34 @@ const Home: Component<{}, {
 		console.log(settings)
 	}
 
+	useChange(this.saveurl, () => {
+		console.log("saving url")
+		settings.stateful.urls[this.index] = this.saveurl;
+	})
+
 	return (
 		<div>
 			<NavDrawer>
 					{use(this.url, thisUrl => settings.stateful.urls.map((url, i) => {
 						return ( 
 						<NavDrawerButton icon={iconOutput} on:click={() => { 
-							this.requestComponent = <RequestView bind:url={use(settings.stateful.urls[i])} />
+							this.index = i;
+							this.saveurl = url;
+							this.requestComponent = <RequestView bind:url={use(this.saveurl)} />
+							this.url = settings.stateful.urls[i];
 						 }} 
-						 selected={thisUrl === url}
+						 selected={this.index === i}
 						>
-							{url}
+							{use(settings.stateful.urls, urls => urls[i])}
 						</NavDrawerButton>
 						)
 					}))}
 					<Button type="filled" on:click={() => {
 						settings.stateful.urls.push("https://example.com/");
-						this.url = settings.stateful.urls[settings.stateful.urls.length - 1];
-						this.requestComponent = <RequestView bind:url={use(settings.stateful.urls[settings.stateful.urls.length - 1])} />
+						this.index = settings.stateful.urls.length - 1;
+						this.saveurl = settings.stateful.urls[this.index];
+						this.requestComponent = <RequestView bind:url={use(this.saveurl)} />
+						this.url = "https://example.com/";
 					} }>New Request</Button>
 			</NavDrawer>
 			{use(this.requestComponent)}

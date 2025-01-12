@@ -7,6 +7,7 @@ export let settings = $store(
 		stateful: $state({
 			urls: ["https://echo.paw.cloud/"]
 		}),
+		currentTab: "raw",
 	},
 	{ ident: "settings", backing: "localstorage", autosave: "auto" },
 );

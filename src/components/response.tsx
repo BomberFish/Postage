@@ -1,4 +1,4 @@
-const Response: Component<{type?:"raw"|"json"|"web", contents?: string}, {
+const Response: Component<{type?:string, contents?: string}, {
 	raw: boolean;
 	json: boolean;
 	web: boolean;
@@ -23,7 +23,7 @@ const Response: Component<{type?:"raw"|"json"|"web", contents?: string}, {
 		padding: 0;
 		margin: 0;
 		box-sizing: border-box;
-		min-height: 50vh;
+		min-height: 75vh;
 	}
 
 	pre {
